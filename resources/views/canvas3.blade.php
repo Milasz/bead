@@ -11,12 +11,33 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
-
+<div>
+<canvas id="canvasHP" width="200" height="50" style="border:1px solid #c3c3c3;">
+</div>
+<div>
+<canvas id="canvasST" width="200" height="50" style="border:1px solid #c3c3c3;">
+</div>
+<div>
+<canvas id="EnemyHP" width="200" height="50" style="border:1px solid #c3c3c3;">
+</div>
 <script>
+var canvas = document.getElementById("canvasHP");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";
+ctx.fillRect(0,0,150,50);
+
+var canvas = document.getElementById("canvasST");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "yellow";
+ctx.fillRect(0,0,150,50);
+
+var canvas = document.getElementById("EnemyHP");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";
+ctx.fillRect(0,0,150,50);
+
+
 var myGamePiece;
-var kaszt;
-
-
 
 
 function startGame() {
