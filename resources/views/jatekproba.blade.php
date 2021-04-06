@@ -59,10 +59,6 @@
         body{ 
             margin:25px 325px; 
         }
-
-
-
-
     </style>
 </head>
 
