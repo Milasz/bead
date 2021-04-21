@@ -17,7 +17,7 @@
         <button class="btn">Option 4</button>
     </div>
 </div>
-<script type="text/javascript" src="{{asset('js/jatek.js')}}" ></script>
+<script type="text/javascript" src="{{asset('js/menu.js')}}" ></script>
 </body>
 </head>
 </html>

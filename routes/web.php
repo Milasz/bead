@@ -48,6 +48,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/canvas4', function () {
     return view('canvas4');
 });
+Route::get('/canvas5', function () {
+    return view('canvas5');
+});
 Route::get('/canvas3', function () {
     return view('canvas3');
 });
