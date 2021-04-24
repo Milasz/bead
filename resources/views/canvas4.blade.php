@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <title>Csapatnév</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </head>
 <body style="margin: 0 auto;">
 <div class="container">
@@ -14,10 +16,23 @@
         <button class="btn">Option 1</button>
         <button class="btn">Option 2</button>
         <button class="btn">Option 3</button>
-        <button class="btn">Option 4</button>
+        <button class="btn">Option 4</button>        
     </div>
 </div>
+
 <script type="text/javascript" src="{{asset('js/jatek.js')}}" ></script>
 </body>
-</head>
+<script>
+    function mentes(){
+        alert('Elmentettem');
+        $.ajax({
+               type:'get',
+               url:'/mentes',  
+                            
+               success:function(data) {
+                  alert(data);
+               }
+            });
+    }
+</script>
 </html>

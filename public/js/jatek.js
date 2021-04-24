@@ -2,13 +2,18 @@ const textElement = document.getElementById('text')
 const optionButtonsElement = document.getElementById('option-buttons')
 
 var state = {
-   
+    
 }
 
 function startGame(){
-    state = {}
+    state = {
+        // lovesz: true,
+        // fejlesztettcsuzli:true,
+    }
     showTextNode(1)
-}
+//     document.getElementsByClassName('btn')[0].setAttribute('onclick',"window.location.href='/belepes'")
+//     console.log(document.getElementsByClassName('btn')[0].onclick)
+ }
 function mentes(){
 
 }
@@ -44,6 +49,13 @@ function selectOption(option){
     }
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
+    if(nextTextNodeId == 100)
+    {
+        document.getElementsByClassName('btn')[0].setAttribute('onclick',"mentes()")
+    }
+    else {
+        document.getElementsByClassName('btn')[0].setAttribute('onclick',"")
+    }
 }
 const textNodes = [
     {
@@ -54,6 +66,38 @@ const textNodes = [
                 text: 'Újrakezdem', //-space
                 nextText:-1,
                 setState:{halott : true}
+            },            
+        ]
+    },
+    {
+        id: 100,
+        text: 'Megláttál egy fénylő kristályt, melybe emlékeidet mentheted el.', 
+        options:[
+            {
+                text: 'Mentés', 
+                nextText:9,                
+            },            
+        ]
+    },
+    {
+        id: 101,
+        text: 'Újabb fénylő kristályt találtál, melybe emlékeidet mentheted el.',
+        options:[
+            {
+                text: 'Újrakezdem', 
+                nextText:24,
+                
+            },            
+        ]
+    },
+    {
+        id: 102,
+        text: 'Game over, szeretnéd újrakezdeni?', 
+        options:[
+            {
+                text: 'Újrakezdem', 
+                nextText:9,
+                
             },            
         ]
     },
@@ -246,125 +290,126 @@ const textNodes = [
                 text:'Az íjat szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszany,
                 setState: {nyil : true, visszany: false},
-                nextText: 9,   
+                nextText: 100,   
             },
             {
                 text:'Az íjat szeretném fejleszteni.',
                 requireState: (currentState) => currentState.nyil,
                 setState: {fejlesztettnyil : true, nyil: false},
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A csúzlit szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszacs,
                 setState :  {csuzli : true, visszacs : false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A csúzlit szeretném fejleszteni.',
                 requireState: (currentState) => currentState.csuzli,
                 setState :  {fejlesztettcsuzli : true, csuzli : false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A katanát szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszak,
                 setState :  {katana : true,visszak: false},         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A katanát szeretném fejleszteni.',
                 requireState: (currentState) => currentState.katana,
                 setState :  {fejlesztettkatana : true, katana: false},         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A dobócsillagot szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszadcs,
                 setState :  {dcs : true,visszadcs: false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A dobócsillagot szeretném fejleszteni.',
                 requireState: (currentState) => currentState.dcs,
                 setState :  {fejlesztettdcs : true,dcs : false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A kardot szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszakard,
                 setState :  {kard : true, visszakard : false },         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A kardot szeretném fejleszteni.',
                 requireState: (currentState) => currentState.kard,
                 setState :  {fejlesztettkard : true, kard : false},         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A pajzsot szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszap,
                 setState :  {pajzs : true, visszap: false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A pajzsot szeretném fejleszteni.',
                 requireState: (currentState) => currentState.pajzs,
                 setState :  {fejlesztettpajzs : true, pajzs: false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A varázskönyvet szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszaVK,
                 setState :  {vK : true, visszaVK : false},         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A varázskönyvet szeretném fejleszteni.',
                 requireState: (currentState) => currentState.vK,
                 setState :  {fejlesztettvK : true, vK: false},         
-                nextText: 9,      
+                nextText: 100,      
             },
             {
                 text:'A varázspálcát szeretném visszakapni.',
                 requireState: (currentState) => currentState.visszaVP,
                 setState :  {vP : true, visszaVP : false},         
-                nextText: 9,     
+                nextText: 100,     
             },
             {
                 text:'A varázspálcát szeretném fejleszteni.',
                 requireState: (currentState) => currentState.vP,
                 setState :  {fejlesztettvP : true,vP : false},         
-                nextText: 9,     
+                nextText: 100,     
             },            
             {
                 text:'Megtartom az Xp-t.',
                 requireState: (currentState) => currentState.lovesz,
                 setState :  {duplaLxp : true},  
-                nextText: 9
+                nextText: 100
             },
             {
                 text:'Megtartom az Xp-t.',
                 requireState: (currentState) => currentState.ninja,
                 setState :  {duplaNxp : true},  
-                nextText: 9
+                nextText: 100
             },
             {
                 text:'Megtartom az Xp-t.',
                 requireState: (currentState) => currentState.harcos,
                 setState :  {duplaHxp : true},  
-                nextText: 9
+                nextText: 100
             },
             {
                 text:'Megtartom az Xp-t.',
                 requireState: (currentState) => currentState.magus,
                 setState :  {duplaMxp : true},  
-                nextText: 9
+                nextText: 100
             },
             
         ]
-    },    
+    },
+       
     {
         id: 9,
         text: 'Tovább haladva utadon egy szellembe botlottál a barlangokok mélyén.\n-Segíts kérlek nagyharcos! Itteni szellem vagyok, ha segítesz nekem kiszabadulni én is megsegítelek utadon.\nHogy döntesz hát?',
@@ -1445,6 +1490,11 @@ const textNodes = [
         options:[
             {
                 text:'Harcra hát!', 
+                requireState: (currentState) => currentState.lovesz, 
+                nextText:40        
+            },  
+            {
+                text:'Harcra hát!', 
                 requireState: (currentState) => currentState.ninja, 
                 nextText:44        
             },  
@@ -1660,7 +1710,7 @@ const textNodes = [
             }, 
 	        {
                 text:'Fáradj vagyok, de mintha ott lenne egy titkos ajtó',
-                requireState: (currentState) => currentState.lövész && currentState.szerencse, 
+                requireState: (currentState) => currentState.lovesz && currentState.szerencse, 
                 nextText: 24
             }, 
             {
@@ -2210,7 +2260,7 @@ const textNodes = [
     },
     {
         id: 55,
-        text: 'Harmadik ellenfeled egy fegyvertelen idézett lény\nHogy döntesz, hogyan győzöd le?', // ez ugyan az 2x, nem?
+        text: 'Utolsó ellenfeled egy elf boszorkány\nHogy döntesz, hogyan győzöd le?', // ez ugyan az 2x, nem?
         options:[
             //mágus
             {
@@ -2261,8 +2311,8 @@ const textNodes = [
 	    ]
     },
     {
-        id: 24, // szellem?
-        text: 'Sikeresen helyt álltál a harcban, így most (???mint gyors Xp-ként???) visszakaphatod az egyik fegyveredet.\n Ezután pedig döntened kell, hogy merre mész tovább:\nBalra ahol megpihenhetsz \nJobbra, ahol tudásodat mutathatod be.',
+        id: 24, 
+        text: 'Sikeresen helyt álltál a harcban, így most visszakaphatod az egyik fegyveredet.\n Ezután pedig döntened kell, hogy merre mész tovább:\nBalra ahol megpihenhetsz \nJobbra, ahol tudásodat mutathatod be.',
         options:[
             //lövész
             {
@@ -3512,7 +3562,7 @@ const textNodes = [
     },
     {
         id: 37,
-        text: 'Sikeresen teljesítetted a küldetésed nagyharcos, most menj, pihenj meg és keres még több kalandot!',
+        text: 'Sikeresen teljesítetted a küldetésed nagy hős! Most eredj, pihenj meg és keres még több kalandot!',
         options:[
             {
                 text:'ÉN VAGYOK A NAGY LÖVÉSZ',

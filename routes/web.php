@@ -17,14 +17,17 @@ use Illuminate\Support\Facades\Auth;
 */
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/welcome', function(){
-    return view('welcome');
-}  
-);
+        return view('welcome');
+        }  
+    );
+    Route::get('/canvas4', function () {
+        return view('canvas4');
+    });
 }
 );
 
 Route::get('/', function () {
-    return view('proba');
+    return view('belepes');
 });
 
 
@@ -36,6 +39,16 @@ Route::get('/belepes', function(){
     return view('belepes');
 }); 
 
+Route::get('/reg', function(){
+    return view('reg');
+}); 
+Route::get('/menu', function(){
+    return view('menu');
+}); 
+
+Route::get('/reg','App\Http\Controllers\RegController@betoltes'); 
+Route::post('/reg','App\Http\Controllers\RegController@letrehoz'); 
+Route::post('/','App\Http\Controllers\AuthController@Auth');
 Route::post('/belepes','App\Http\Controllers\AuthController@Auth'); 
 
 // Route::get('/regisztracio', 'AuthController@betoltes'); 
@@ -45,12 +58,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::get('/canvas4', function () {
-    return view('canvas4');
-});
+
 Route::get('/canvas5', function () {
     return view('canvas5');
 });
 Route::get('/canvas3', function () {
     return view('canvas3');
 });
+
+Route::get('/mentes', [App\Http\Controllers\MentesController::class, 'mentes']);
