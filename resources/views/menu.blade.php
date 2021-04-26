@@ -14,11 +14,20 @@
     <div > Üdvözlünk a játékban </div>
     <div  class="btn-grid">
     <a href="canvas4" style="text-decoration:none" class="btn">Új játék kezdése</a>
-        <button class="btn">Mentett játék állás folytatása</button>    
+    <button class="btn">Mentett játék állás folytatása</button>    
+    <a href="/logout" style="text-decoration:none" class="btn">Kilépés</a>
     </div>
 </div>
 
 
 </body>
+<script>
+    var msg = '{{Session::get("alert")}}';
+        var exist = '{{Session::has("alert")}}';
+        if(exist)
+        {
+            alert(msg);
+        }
+    </script>
 
 </html>

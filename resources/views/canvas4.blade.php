@@ -12,6 +12,7 @@
 <body style="margin: 0 auto;">
 <div class="container">
     <div id="text"> Text </div>
+    <div></div>
     <div id="option-buttons" class="btn-grid">
         <button class="btn">Option 1</button>
         <button class="btn">Option 2</button>

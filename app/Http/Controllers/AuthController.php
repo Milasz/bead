@@ -32,7 +32,8 @@ class AuthController extends Controller
         if(Auth::attempt(['name'=>$username, 'password'=> $password])){           
             return view('menu');
         }
-        return "sikertelen";
+        
+        return redirect('/belepes')->with('alert','Nem létezik ilyen játékos!');
 
     }
 }

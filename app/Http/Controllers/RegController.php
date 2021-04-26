@@ -19,7 +19,7 @@ class RegController extends Controller
     {
         if( $request->input('username') == '' || ($request->input('password')) == '')
         {
-            return redirect('/reg')->with('alert','Agyjá meg adatokat pls!');
+            return redirect('/reg')->with('alert','Adj meg adatokat, kérlek!');
         }
         if(DB::table('users')->where('name',$request->input('username'))->value('id') != '')
         {            

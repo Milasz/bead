@@ -42,6 +42,12 @@ Route::get('/belepes', function(){
 Route::get('/reg', function(){
     return view('reg');
 }); 
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('belepes')->with('alert','Köszönjük, hogy velünk játszottál!');
+});
+
 Route::get('/menu', function(){
     return view('menu');
 }); 
@@ -51,13 +57,11 @@ Route::post('/reg','App\Http\Controllers\RegController@letrehoz');
 Route::post('/','App\Http\Controllers\AuthController@Auth');
 Route::post('/belepes','App\Http\Controllers\AuthController@Auth'); 
 
+
 // Route::get('/regisztracio', 'AuthController@betoltes'); 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
 
 Route::get('/canvas5', function () {
     return view('canvas5');
