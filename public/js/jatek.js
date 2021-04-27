@@ -1,5 +1,6 @@
 const textElement = document.getElementById('text')
 const optionButtonsElement = document.getElementById('option-buttons')
+const imgElement = document.getElementById('image')
 
 
 var state = {
@@ -18,10 +19,9 @@ var lovesz = {
 }
 
 function startGame(){
-    //state = {
-        // lovesz: true,
-        // fejlesztettcsuzli:true,
-    //}
+    state = {
+        
+    }
     showTextNode(1)
 //     document.getElementsByClassName('btn')[0].setAttribute('onclick',"window.location.href='/belepes'")
 //     console.log(document.getElementsByClassName('btn')[0].onclick)
@@ -121,14 +121,14 @@ const textNodes = [
                 nextText: 2  //Math.floor(Math.random() * 10) + 1     
             },
             {
-                text:'Áh inkább, most menjen más',
+                text:'Áh inkább, most menjen más.',
                 nextText: 0
             }
         ]
     },
     {
         id: 2,
-        text: 'Válassz kaszt!',
+        text: 'Válassz kasztot!',
         options:[
         {
             text: 'Ijjász',
@@ -166,7 +166,7 @@ const textNodes = [
     },
     {
         id: 4,
-        text: 'A tolvajt választottad. \nAz eszközeidet csak egyszer használhatod fel:\n Katana (Fejlesztheted/visszakérheted)\nDobócsillag (Fejlesztheted/visszakérheted)\nKülönleges képesség: Osonás (NEM fejleszthető/NEM visszakérhető).\nBiztos ninja akarsz lenni?',
+        text: 'A tolvajt választottad. \nAz eszközeidet csak egyszer használhatod fel:\n Katana (Fejlesztheted/visszakérheted)\nDobócsillag (Fejlesztheted/visszakérheted)\nKülönleges képesség: Osonás (NEM fejleszthető/NEM visszakérhető).\nBiztos tolvaj akarsz lenni?',
         options:[
             {
                 text:'Igen',

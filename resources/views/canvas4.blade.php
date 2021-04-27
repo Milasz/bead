@@ -11,8 +11,9 @@
 </head>
 <body style="margin: 0 auto;">
 <div class="container">
+    <!-- <div id="image" class="image"></div> -->
     <div id="text"> Text </div>
-    <div></div>
+   
     <div id="option-buttons" class="btn-grid">
         <button class="btn">Option 1</button>
         <button class="btn">Option 2</button>
@@ -20,6 +21,9 @@
         <button class="btn">Option 4</button>        
     </div>
 </div>
+<!-- <div class="container">
+    <div id="image" class="image"></div>
+</div> -->
 
 <script type="text/javascript" src="{{asset('js/jatek.js')}}" ></script>
 </body>
