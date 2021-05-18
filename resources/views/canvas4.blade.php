@@ -21,9 +21,11 @@
         <button class="btn">Option 4</button>        
     </div>
 </div>
-<!-- <div class="container">
-    <div id="image" class="image"></div>
-</div> -->
+    <div class="container" id = "kep">
+    <img  id="image">
+    </div>
+    
+
 
 <script type="text/javascript" src="{{asset('js/jatek.js')}}" ></script>
 </body>

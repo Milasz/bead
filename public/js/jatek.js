@@ -1,22 +1,19 @@
 const textElement = document.getElementById('text')
 const optionButtonsElement = document.getElementById('option-buttons')
 const imgElement = document.getElementById('image')
+const kepElement = document.getElementById('kep')
 
 
-var state = {
-    kaszt: "Lövész",
-    elet:12,
-    stamina : 10,
-    
+let state = {
+    //var
 }
 
-var lovesz = {
-    kaszt: "Lövész",
-    hp:12,
-    stamina : 10,
-    pajzs : 11,
-
-}
+// var lovesz = {
+//     kaszt: "Lövész",
+//     hp:12,
+//     stamina : 10,
+//     pajzs : 11,
+// }
 
 function startGame(){
     state = {
@@ -30,9 +27,17 @@ function startGame(){
 function showTextNode(textNodeIndex){
     const textNode = textNodes.find(textNode=> textNode.id === textNodeIndex)
     textElement.innerText = textNode.text;
+    imgElement.setAttribute('src', textNode.img);
     while(optionButtonsElement.firstChild)
     {
         optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+    }
+    if(textNode.img==undefined)
+    {
+        kepElement.style.display = 'none';
+    }
+    else if(textNode.img!=undefined&&kepElement.style.display=="none"){
+        kepElement.style.display = 'block';
     }
 
     textNode.options.forEach(option => {
@@ -75,9 +80,24 @@ const textNodes = [
         text: 'Game over', //kezd újra, ha akarod?',
         options:[
             {
-                text: 'Kilépés a játékból', //-space                
+                text: 'Kilépsz a játékból', //-space                
                 setState:{halott : true}
             },            
+        ]
+    },
+    {
+        id: 1,
+        img : "/kepek/Képkivágás.PNG",
+        text: 'Egyszer volt, hol nem volt, volt egyszer egy nagy város, melynek lakói békében éltek egymással, mígnem egy nap szörnyek rátámadtak a városra. A lakosság fejét vesztve menekülni próbált. Az egyik egyik felét megölték, a másik felét pedig elvitték magukkal a szörnyek, hogy később megegyék őket. Eltelt egy nap mire a hír a király fülébe jutott, és ő úgy határozott, hogy a legnagyobb hősét küldi el, hogy legyőzze ezeket a vérengző fenevadakat. Te vagy ez a hős! Itt az idő, hogy indulj és teljesítsd a feladatodat!',
+        options:[
+            {
+                text:'Készen állsz az előtted álló feladatra!',  
+                nextText: 2  //Math.floor(Math.random() * 10) + 1     
+            },
+            {
+                text:'Áh inkább, most menjen más.',
+                nextText: 0
+            }
         ]
     },
     {
@@ -85,7 +105,7 @@ const textNodes = [
         text: 'Megláttál egy fénylő kristályt, melybe emlékeidet mentheted el.', 
         options:[
             {
-                text: 'Mentés', 
+                text: 'Mentesz', 
                 nextText:9,                
             },            
         ]
@@ -95,7 +115,7 @@ const textNodes = [
         text: 'Újabb fénylő kristályt találtál, melybe emlékeidet mentheted el.',
         options:[
             {
-                text: 'Újrakezdem', 
+                text: 'Mentesz', 
                 nextText:24,
                 
             },            
@@ -103,29 +123,16 @@ const textNodes = [
     },
     {
         id: 102,
-        text: 'Game over, szeretnéd újrakezdeni?', 
+        text: 'Újabb fénylő kristályt találtál, melybe emlékeidet mentheted el.', 
         options:[
             {
-                text: 'Újrakezdem', 
+                text: 'Mentesz', 
                 nextText:9,
                 
             },            
         ]
     },
-    {
-        id: 1,
-        text: 'Egyszer volt, hol nem volt, volt egyszer egy nagy város, melynek lakói békében éltek egymással, mígnem egy nap szörnyek rátámadtak a városra. A lakosság fejét vesztve menekülni próbált. Az egyik egyik felét megölték, a másik felét pedig elvitték magukkal a szörnyek, hogy később megegyék őket. Eltelt egy nap mire a hír a király fülébe jutott, és ő úgy határozott, hogy a legnagyobb hősét küldi el, hogy legyőzze ezeket a vérengző fenevadakat. Te vagy ez a hős! Itt az idő, hogy indulj és teljesítsd a feladatodat!',
-        options:[
-            {
-                text:'Készen állok az előttem álló feladatra!',  
-                nextText: 2  //Math.floor(Math.random() * 10) + 1     
-            },
-            {
-                text:'Áh inkább, most menjen más.',
-                nextText: 0
-            }
-        ]
-    },
+    
     {
         id: 2,
         text: 'Válassz kasztot!',
@@ -151,7 +158,8 @@ const textNodes = [
     },
     {
         id: 3,
-        text: 'A ijjászt választottad. \nAz eszközeidet csak egyszer használhatod fel:\nNyíl (Fejlesztheted/visszakérheted)\nCsúzli (Fejlesztheted/visszakérheted)\nKülönleges képesség: Nyílzápor (NEM fejleszthető/NEM visszakérhető).\nBiztos lövész akarsz lenni?',
+        img : "/kepek/avatar.png",
+        text: 'A ijjászt választottad. \nAz eszközeidet csak egyszer használhatod fel:\nNyíl (Fejlesztheted/visszakérheted)\nCsúzli (Fejlesztheted/visszakérheted)\nEgyszer használatos menekülés, ami NEM fejleszthető és NEM visszakérhető.\nBiztos lövész akarsz lenni?',
         options:[
             {
                 text:'Igen',
@@ -166,7 +174,7 @@ const textNodes = [
     },
     {
         id: 4,
-        text: 'A tolvajt választottad. \nAz eszközeidet csak egyszer használhatod fel:\n Katana (Fejlesztheted/visszakérheted)\nDobócsillag (Fejlesztheted/visszakérheted)\nKülönleges képesség: Osonás (NEM fejleszthető/NEM visszakérhető).\nBiztos tolvaj akarsz lenni?',
+        text: 'A tolvajt választottad. \nAz eszközeidet csak egyszer használhatod fel:\n Katana (Fejlesztheted/visszakérheted)\nDobócsillag (Fejlesztheted/visszakérheted)\nEgyszer használatos menekülés, ami NEM fejleszthető és NEM visszakérhető.\nBiztos tolvaj akarsz lenni?',
         options:[
             {
                 text:'Igen',
@@ -181,7 +189,7 @@ const textNodes = [
     },
     {
         id: 5,
-        text: 'A harcost választottad. \nAz eszközeidet csak egyszer használhatod fel:\nKard (Fejlesztheted/visszakérheted)\nPajzs (Fejlesztheted/visszakérheted)\nKülönleges képesség: Páncélzat (NEM fejleszthető/NEM visszakérhető).\nBiztos harcos akarsz lenni?',
+        text: 'A harcost választottad. \nAz eszközeidet csak egyszer használhatod fel:\nKard (Fejlesztheted/visszakérheted)\nPajzs (Fejlesztheted/visszakérheted)\nEgyszer használatos menekülés, ami NEM fejleszthető és NEM visszakérhető.\nBiztos harcos akarsz lenni?',
         options:[
             {
                 text:'Igen',
@@ -196,7 +204,7 @@ const textNodes = [
     },
     {
         id: 6,
-        text: 'A mágust választottad. \nAz eszközeidet csak egyszer használhatod fel:\nVarázskönyv (Fejlesztheted/visszakérheted)\nVarázspálca (Fejlesztheted/visszakérheted)\nKülönleges képesség: Idézés (NEM fejleszthető/NEM visszakérhető).\nBiztos mágus akarsz lenni?',
+        text: 'A mágust választottad. \nAz eszközeidet csak egyszer használhatod fel:\nVarázskönyv (Fejlesztheted/visszakérheted)\nVarázspálca (Fejlesztheted/visszakérheted)\nEgyszer használatos menekülés, ami NEM fejleszthető és NEM visszakérhető.\nBiztos mágus akarsz lenni?',
         options:[
             {
                 text:'Igen',
@@ -214,73 +222,73 @@ const textNodes = [
         text:'A barlang bejáratában egy apró goblin állt őrségben. Ahhoz, hogy le tudj jutni a barlangba, le kell győznöd. Harcolj, vagy fuss, mint egy gyáva nyúl!',
         options:[
             {
-                text:'Íjjat használok', //ezeket semmiképp nem kérdőjellel kéne írni és talán első szám egyes személyben
+                text:'Íjjat használod', //ezeket semmiképp nem kérdőjellel kéne írni és talán első szám egyes személyben
                 requireState: (currentState) => currentState.lovesz,
-                setState :  {nyil : false,/* visszany: true*/},         
+                setState :  {nyil : false,},         
                 nextText: 8,      
             },
             {
-                text:'Csúzlit használok',
+                text:'Csúzlit használod',
                 requireState: (currentState) => currentState.lovesz,
                 setState :  {csuzli : false},         
                 nextText: 8,     
             },
             {   
-                text:'A különleges képességet használom',
+                text:'Az egyszeri menekülést választod',
                 requireState: (currentState) => currentState.lovesz,
                 setState :  {kulonL : false},         
                 nextText: 8,        
             },
             {
-                text:'Katanát használok',
+                text:'Katanát használod',
                 requireState: (currentState) => currentState.ninja,
                 setState :  {katana : false},         
                 nextText: 8,      
             },
             {
-                text:'Dobócsillagot használok',
+                text:'Dobócsillagot használod',
                 requireState: (currentState) => currentState.ninja,
                 setState :  {dcs : false},         
                 nextText: 8,     
             },
             {   
-                text:'A különleges képességet használom',
+                text:'Az egyszeri menekülést választod',
                 requireState: (currentState) => currentState.ninja,
                 setState :  {kulonN : false},         
                 nextText: 8,        
             },
             {
-                text:'Kardot használok',
+                text:'Kardot használod',
                 requireState: (currentState) => currentState.harcos,
                 setState :  {kard : false},         
                 nextText: 8,      
             },
             {
-                text:'Pajzsot használok',
+                text:'Pajzsot használod',
                 requireState: (currentState) => currentState.harcos,
                 setState :  {pajzs : false},         
                 nextText: 8,     
             },
             {   
-                text:'A különleges képességet használom',
+                text:'Az egyszeri menekülést választod',
                 requireState: (currentState) => currentState.harcos,
                 setState :  {kulonH : false},         
                 nextText: 8,        
             },
             {
-                text:'Varázskönyvet használok',
+                text:'Varázskönyvet használod',
                 requireState: (currentState) => currentState.magus,
                 setState :  {vK : false},         
                 nextText: 8,      
             },
             {
-                text:'Varázspálcát használok',
+                text:'Varázspálcát használod',
                 requireState: (currentState) => currentState.magus,
                 setState :  {vP : false},         
                 nextText: 8,     
             },
             {   
-                text:'A különleges képességet használom',
+                text:'Az egyszeri menekülést választod',
                 requireState: (currentState) => currentState.magus,
                 setState :  {kulonM : false},         
                 nextText: 8,        
@@ -296,121 +304,121 @@ const textNodes = [
         text: 'Az ellenfeledet legyőzted, aki hátrahagyott neked Xp-t.\nEzt most felhasználhatod, hogy visszaszerzed elhasznált fegyveredet, erősítheted egy másik fegyveredet, vagy később felhasználhatod egy kétszer használatos fegyver megszerzéséhez.\nHogy döntesz hát?',
         options:[
             {
-                text:'Az íjat szeretném visszakapni.',
+                text:'Az íjat szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.nyil) && currentState.lovesz,
                 setState: {nyil : true},
                 nextText: 100,   
             },
             {
-                text:'Az íjat szeretném fejleszteni.',
+                text:'Az íjat szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.nyil  && currentState.lovesz,
                 setState: {fejlesztettnyil : true, nyil: false},
                 nextText: 100,      
             },
             {
-                text:'A csúzlit szeretném visszakapni.',
+                text:'A csúzlit szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.csuzli)  && currentState.lovesz,
                 setState :  {csuzli : true},         
                 nextText: 100,     
             },
             {
-                text:'A csúzlit szeretném fejleszteni.',
+                text:'A csúzlit szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.csuzli  && currentState.lovesz,
                 setState :  {fejlesztettcsuzli : true, csuzli : false},         
                 nextText: 100,     
             },
             {
-                text:'A katanát szeretném visszakapni.',
+                text:'A katanát szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.katana)  && currentState.ninja,
                 setState :  {katana : true},         
                 nextText: 100,      
             },
             {
-                text:'A katanát szeretném fejleszteni.',
+                text:'A katanát szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.katana && currentState.ninja,
                 setState :  {fejlesztettkatana : true, katana: false},         
                 nextText: 100,      
             },
             {
-                text:'A dobócsillagot szeretném visszakapni.',
+                text:'A dobócsillagot szeretnéd visszakapni.',
                 requireState: (currentState) =>!(currentState.dcs) && currentState.ninja,
                 setState :  {dcs : true},         
                 nextText: 100,     
             },
             {
-                text:'A dobócsillagot szeretném fejleszteni.',
+                text:'A dobócsillagot szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.dcs && currentState.ninja,
                 setState :  {fejlesztettdcs : true,dcs : false},         
                 nextText: 100,     
             },
             {
-                text:'A kardot szeretném visszakapni.',
+                text:'A kardot szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.kard) && currentState.harcos,
                 setState :  {kard : true },         
                 nextText: 100,      
             },
             {
-                text:'A kardot szeretném fejleszteni.',
+                text:'A kardot szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.kard && currentState.harcos,
                 setState :  {fejlesztettkard : true, kard : false},         
                 nextText: 100,      
             },
             {
-                text:'A pajzsot szeretném visszakapni.',
+                text:'A pajzsot szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.pajzs) && currentState.harcos,
                 setState :  {pajzs : true},         
                 nextText: 100,     
             },
             {
-                text:'A pajzsot szeretném fejleszteni.',
+                text:'A pajzsot szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.pajzs && currentState.harcos,
                 setState :  {fejlesztettpajzs : true, pajzs: false},         
                 nextText: 100,     
             },
             {
-                text:'A varázskönyvet szeretném visszakapni.',
+                text:'A varázskönyvet szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.vK) && currentState.magus,
                 setState :  {vK : true},         
                 nextText: 100,      
             },
             {
-                text:'A varázskönyvet szeretném fejleszteni.',
+                text:'A varázskönyvet szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.vK && currentState.magus,
                 setState :  {fejlesztettvK : true, vK: false},         
                 nextText: 100,      
             },
             {
-                text:'A varázspálcát szeretném visszakapni.',
+                text:'A varázspálcát szeretnéd visszakapni.',
                 requireState: (currentState) => !(currentState.vP) && currentState.magus,
                 setState :  {vP : true},         
                 nextText: 100,     
             },
             {
-                text:'A varázspálcát szeretném fejleszteni.',
+                text:'A varázspálcát szeretnéd fejleszteni.',
                 requireState: (currentState) => currentState.vP && currentState.magus,
                 setState :  {fejlesztettvP : true,vP : false},         
                 nextText: 100,     
             },            
             {
-                text:'Megtartom az Xp-t.',
+                text:'Megtartod az Xp-t.',
                 requireState: (currentState) => currentState.lovesz,
                 setState :  {duplaLxp : true},  
                 nextText: 100
             },
             {
-                text:'Megtartom az Xp-t.',
+                text:'Megtartod az Xp-t.',
                 requireState: (currentState) => currentState.ninja,
                 setState :  {duplaNxp : true},  
                 nextText: 100
             },
             {
-                text:'Megtartom az Xp-t.',
+                text:'Megtartod az Xp-t.',
                 requireState: (currentState) => currentState.harcos,
                 setState :  {duplaHxp : true},  
                 nextText: 100
             },
             {
-                text:'Megtartom az Xp-t.',
+                text:'Megtartod az Xp-t.',
                 requireState: (currentState) => currentState.magus,
                 setState :  {duplaMxp : true},  
                 nextText: 100
@@ -424,47 +432,47 @@ const textNodes = [
         text: 'Tovább haladva utadon egy szellem botlottál a barlang mélyén.\n-Segíts kérlek nagy harcos! Én egy elátkozott ideláncolt lélek vagyok, ha segítesz nekem kiszabadulni én is megsegítelek utadon.\nHogy döntesz hát?',
         options:[
             {
-                text:'Segítek rajta, hisz a plusz segítség sosem árt.',
+                text:'Segítesz rajta, hisz a plusz segítség sosem árt.',
                 setState: { szellem: true},   
                 nextText:10         
             },
             {
-                text:'Nem szimpatikus nekem ez a szellem, így inkább egyedül megyek tovább.',
+                text:'Nem szimpatikus neked ez a szellem, így inkább egyedül mész tovább.',
                 nextText:10
             }
         ]
     },
     {
         id: 10,
-        text: 'Utatad folytatva egy elágazáshoz értél.\nHárom utat látsz magad előtt:',
+        text: 'Utatad folytatva egy elágazáshoz értél.\nHárom utat látsz magad előtt:\nBalra egy sötét járatot látsz, melyben denevéreket találsz.\nKözépen egy kivilágított vájat látsz, ahonnan gyenge szellő süvít a falak közül.\nJobbra egy rejtélyes járatot látsz, ahol furcsa jeleket találsz a falon.',
         options:[
             {
-                text:'Balra egy sötét járatot látsz, melyben denevéreket találsz.',
+                text:'Balra mész.',
                 requireState: (currentState) => !(currentState.szellem),  
                 nextText:11         
             },
             {
-                text:'Középen egy kivilágított vájat látsz, ahonnan gyenge szellő süvít a falak közül.',
+                text:'Középen mész.',
                 requireState: (currentState) => !(currentState.szellem),   
                 nextText:12
             },
             {
-                text:'Jobbra egy rejtélyes járatot látsz, ahol furcsa jeleket találsz a falon.',
+                text:'Jobbra mész.',
                 requireState: (currentState) => !(currentState.szellem),   
                 nextText:14        
             },
             {
-                text:'Balra egy sötét járatot látsz, melyben denevéreket találsz.\nSzellem:\n-Hős! Veszélyes az út, de itt egy pihenő találsz, ahol megpihenhetsz.',
+                text:'Balra mész.\nSzellem:\n-Hős! Veszélyes az út, de itt egy pihenő találsz, ahol megpihenhetsz.',
                 requireState: (currentState) => currentState.szellem,  
                 nextText:11         
             },
             {
-                text:'Középen egy kivilágított vájat látsz, ahonnan gyenge szellő süvít a falak közül.\nSzellem:\n-Hős! Még véletlenül se ezt az utat válaszd, mert egy hatalmas szörny vár.',
+                text:'Középen mész.\nSzellem:\n-Hős! Még véletlenül se ezt az utat válaszd, mert egy hatalmas szörny vár.',
                 requireState: (currentState) => currentState.szellem,    
                 nextText:12 
             },
             {
-                text:'Jobbra egy rejtélyes járatot látsz, melyben furcsa jeleket találsz a falon.\nSzellem:\n-Hős! A falon a rejtvények megfejtései vannak, ne félj tőle.',
+                text:'Jobbra mész.\nSzellem:\n-Hős! A falon a rejtvények megfejtései vannak, ne félj tőle.',
                 requireState: (currentState) => currentState.szellem,  
                 nextText:14       
             },
@@ -484,7 +492,7 @@ const textNodes = [
                 nextText:17       
             },
             {
-                text:'Maradok még\n(Ugyan ide fog betölteni téged):',
+                text:'Maradsz még\n(Ugyan ide fog betölteni téged):',
                 nextText: 11
             }
         ]
@@ -494,147 +502,147 @@ const textNodes = [
         text: 'A barlang mélyén, mely oly barátságosnak nézett ki egy szörnnyel találod magad szemben. Most itt az idő, hogy harcolj, különben meghalsz!',
         options:[
             {
-                text:'Lelövöm az íjammal.',
+                text:'Lelövöd az íjaddal.',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.nyil,
                 setState: { nyil: false},   
                 nextText:13        
             },
             {
-                text:'Lelövöm a fejlesztett íjammal.',
+                text:'Lelövöd a fejlesztett íjaddal.',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.fejlesztettnyil,
                 setState: { fejlesztettnyil:false, nyil: true},   
                 nextText:13       
             },
             {
-                text:'Lelövöm a csúzlimmal.',
+                text:'Lelövöd a csúzliddal.',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.csuzli,
                 setState: { csuzli: false},   
                 nextText:13        
             },
             {
-                text:'Lelövöm a fejlesztett csúzlimmal.',
+                text:'Lelövöd a fejlesztett csúzliddal.',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.fejlesztettcsuzli,
                 setState: { fejlesztettcsuzli:false, csuzli: true},   
                 nextText:13       
             },
             {
-                text:'Használom a különleges képességemet.',
+                text:'Használod az egyszeri menekülést.',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.kulonL,
                 setState: { kulonL: false},   
                 nextText:13       
             },
             {
-                text:'Leszúrom a katanámmal.',
+                text:'Leszúrod a katanáddal.',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.katana,
                 setState: { katana: false},   
                 nextText:13        
             },
             {
-                text:'Leszúrom a fejlesztett katanámmal.',
+                text:'Leszúrod a fejlesztett katanáddal.',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.fejlesztettkatana,
                 setState: { fejlesztettkatana:false, katana: true},   
                 nextText:13        
             },
             {
-                text:'Megdobom a dobócsillagommal.',
+                text:'Megdobod a dobócsillagoddal.',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.dcs,
                 setState: { dcs: false},   
                 nextText:13        
             },
             {
-                text:'Megdobom a fejlesztett dobócsillagommal.',
+                text:'Megdobod a fejlesztett dobócsillagoddal.',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.fejlesztettdcs,
                 setState: { fejlesztettdcs:false, dcs: true},   
                 nextText:13       
             },
             {
-                text:'Használom a különleges képességemet',
+                text:'Használod a különleges.',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.kulonN,
                 setState: { kulonN: false},   
                 nextText:13        
             },
             {
-                text:'Leszúrom a kardommal.',
+                text:'Leszúrod a kardoddal.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.kard,
                 setState: { kard: false},   
                 nextText:13        
             },
             {
-                text:'Leszúrom a fejlesztett kardommal.',
+                text:'Leszúrod a fejlesztett kardoddal.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.fejlesztettkard,
                 setState: { fejlesztettkard:false, kard: true},   
                 nextText:13       
             },
             {
-                text:'Nekirontok a pajzsommal.',
+                text:'Nekirontasz a pajzsoddal.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.pajzs,
                 setState: { pajzs: false},   
                 nextText:13       
             },
             {
-                text:'Nekirontok a fejlesztett pajzsommal.',
+                text:'Nekirontasz a fejlesztett pajzsoddal.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.fejlesztettpajzs,
                 setState: { fejlesztettpajzs:false, pajzs: true},   
                 nextText:13       
             },
             {
-                text:'Használom a különleges képességemet',
+                text:'Használod az egyszeri menekülést.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.kulonH,
                 setState: { kulonN: false},   
                 nextText:13       
             },
             {
-                text:'Elvarázsolom egy varázsigével a könyvből.',
+                text:'Elvarázsolod egy varázsigével a könyvből.',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.vK,
                 setState: { vK: false},   
                 nextText:13        
             },
             {
-                text:'Elvarázsolom egy varázsigével a fejlesztett könyvből.',
+                text:'Elvarázsolod egy varázsigével a fejlesztett könyvből.',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.fejlesztettvK,
                 setState: { fejlesztettvK:false, vK: true},   
                 nextText:13       
             },
             {
-                text:'A pálcámmal elvarázsolom.',
+                text:'A pálcáddal elvarázsolod.',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.vP,
                 setState: { vP: false},   
                 nextText:13       
             },
             {
-                text:'A fejlesztett pálcámmal elvarázsolom.',
+                text:'A fejlesztett pálcáddal elvarázsolod.',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.fejlesztettvP,
                 setState: { fejlesztettvP: false, vP: true},   
                 nextText:13       
             },
             {
-                text:'Használom a különleges képességemet',
+                text:'Használod az egyszeri menekülést.',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.kulonM,
                 setState: { kulonM: false},   
                 nextText:13       
             },
             {
-                text:'Menekülök',
+                text:'Feladot és elfutsz mint egy kislány',
                 nextText: 0
             }
         ]
@@ -644,140 +652,140 @@ const textNodes = [
         text: 'Újabb Xp nyertél, hogy használod fel a javadra?',
         options:[
             {
-                text:'Szeretném az íjamat visszakapni',
+                text:'Szeretnéd az íjadat visszakapni',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => !(currentState.nyil),
                 setState: { nyil: true},   
                 nextText:17     
             },
             {
-                text:'Szeretném az íjamat fejleszteni',
+                text:'Szeretnéd az íjadat fejleszteni',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.nyil,
                 setState: { nyil: false, fejlesztettnyil: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a csúzlimat visszakapni',
+                text:'Szeretnéd a csúzlidat visszakapni',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => !(currentState.csuzli),
                 setState: { csuzli: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a csúzlimat fejleszteni',
+                text:'Szeretnéd a csúzlidat fejleszteni',
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.csuzli,
                 setState: { csuzli: false, fejlesztettcsuzli: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném dupla xp-met beváltani Robin Hood íját.', // dupla helyett 2?
+                text:'Szeretnéd a két xp-det beváltani Robin Hood íjára.', // dupla helyett 2?
                 requireState: (currentState) => currentState.lovesz,
                 requireState: (currentState) => currentState.duplaLxp,
                 setState: { nagyhood: true, duplaLxp: false},   
                 nextText:17       
             },
             {
-                text:'Szeretném a katanámat visszakapni',
+                text:'Szeretnéd a katanádat visszakapni',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => !(currentState.katana),
                 setState: { katana: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a katanámat fejleszteni',
+                text:'Szeretnéd a katanádat fejleszteni',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.katana,
                 setState: { katana: false, fejlesztettkatana: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a dobócsillagomat visszakapni',
+                text:'Szeretnéd a dobócsillagodat visszakapni',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => !(currentState.dcs),
                 setState: { dcs: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a dobócsillagomat fejleszteni',
+                text:'Szeretnéd a dobócsillagodat fejleszteni',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.dcs,
                 setState: { dcs: false, fejlesztettdcs: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném dupla xp-met beváltani Nagy Kay szamurai kardjára',
+                text:'Szeretnéd a két xp-det beváltani Nagy Kay szamurai kardjára',
                 requireState: (currentState) => currentState.ninja,
                 requireState: (currentState) => currentState.duplaNxp,
                 setState: { nagyszamurai: true, duplaNxp: false},   
                 nextText:17       
             },
             {
-                text:'Szeretném a kardomat visszakapni',
+                text:'Szeretnéd a kardodat visszakapni',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => !(currentState.kard),
                 setState: { kard: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a kardomat fejleszteni',
+                text:'Szeretnéd a kardodat fejleszteni',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.kard,
                 setState: { kard: false, fejlesztettkard: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a pajzsomat visszakapni',
+                text:'Szeretnéd a pajzsodat visszakapni',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => !(currentState.pajzs),
                 setState: { pajzs: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a pajszomat fejleszteni',
+                text:'Szeretnéd a pajszodat fejleszteni',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.pajzs,
                 setState: { pajzs: false, fejlesztettpajzs: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném dupla xp-met beváltani az Excaliburra .',
+                text:'Szeretnéd a két xp-det beváltani az Excaliburra',
                 requireState: (currentState) => currentState.harcos,
                 requireState: (currentState) => currentState.duplaHxp,
                 setState: { nagyexcalibur: true, duplaHxp: false},   
                 nextText:17       
             },
             {
-                text:'Szeretném a könyvemet visszakapni',
+                text:'Szeretnéd a könyvedet visszakapni',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => !(currentState.vK),
                 setState: { vK: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a könyvemet fejleszteni',
+                text:'Szeretnéd a könyvedet fejleszteni',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.vK,
                 setState: { fejlesztettvK: true, vK: false},   
                 nextText:17       
             },
             {
-                text:'Szeretném a pálcámat visszakapni',
+                text:'Szeretnéd a pálcádat visszakapni',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => !(currentState.vP),
                 setState: { vP: true},   
                 nextText:17       
             },
             {
-                text:'Szeretném a pálcámat fejleszteni',
+                text:'Szeretnéd a pálcádat fejleszteni',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.vP,
                 setState: { fejlesztettvP: true, vP: false},   
                 nextText:17      
             },
             {
-                text:'Szeretném dupla xp-met beváltani a Merlin varázs könyvére.',
+                text:'Szeretnéd a két xp-det beváltani a Merlin varázs könyvére.',
                 requireState: (currentState) => currentState.magus,
                 requireState: (currentState) => currentState.duplaMxp,
                 setState: { nagymerlin: true, duplaMxp: false},   
@@ -1557,7 +1565,7 @@ const textNodes = [
                 nextText: 41      
             },
             {
-                text:'A különleges képességemmel',
+                text:'Az különleges képességemmel',
                 requireState: (currentState) => currentState.kulonL, 
                 setState: {kulonL: false},  
                 nextText: 41        
