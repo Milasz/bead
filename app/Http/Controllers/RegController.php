@@ -17,6 +17,10 @@ class RegController extends Controller
 
     public function letrehoz(Request $request)
     {
+        if( $request->input('passwordcheck') == ($request->input('password')))
+        {
+            return redirect('/reg')->with('alert','A jelszó nem egyezik!');
+        }
         if( $request->input('username') == '' || ($request->input('password')) == '')
         {
             return redirect('/reg')->with('alert','Adj meg adatokat, kérlek!');
