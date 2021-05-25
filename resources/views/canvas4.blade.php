@@ -21,7 +21,8 @@
         <button class="btn">Option 4</button>        
     </div>
 </div>
-    <div class="container" id = "kep">
+
+<div class="image" id = "kep">
     <img  id="image">
     </div>
     
