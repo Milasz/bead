@@ -11,7 +11,7 @@
             @csrf
             <input name="username" placeholder="Felhasználónév" type="text">
             <input name="password" placeholder="Jelszó" type="password">
-            <input name="passwordcheck" placeholder="Jelszó ismét" type="passwordcheck">
+            <input name="passwordcheck" placeholder="Jelszó ismét" type="password">
             <button>Regisztráció</button>  
         </form>  
     </div> 
