@@ -1,1 +1,0 @@
-// létre hozzuk a játék teret majd meghívjuk a játék funciót
